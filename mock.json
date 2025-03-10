@@ -1,0 +1,226 @@
+{
+  "songs": [
+    {
+      "id": 1,
+      "title": "Who did you think i was",
+      "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
+      "genre": ["Pop", "Rock", "Alternative"],
+      "year": 2007,
+      "duration": 424,
+      "rating": 9.27,
+      "artist": 1
+    },
+    {
+      "id": 2,
+      "title": "Penny Lane",
+      "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
+      "genre": ["Rock", "Pop", "Chill"],
+      "year": 1967,
+      "duration": 303,
+      "rating": 8.99,
+      "artist": 2
+    },
+    {
+      "id": 3,
+      "title": "Hey Jude",
+      "poster": "http://dummyimage.com/400x600.png/5fa2dd/ffffff",
+      "genre": ["Pop", "Rock", "Alternative"],
+      "year": 1974,
+      "duration": 206,
+      "rating": 6.25,
+      "artist": 2
+    },
+    {
+      "id": 4,
+      "title": "(I Can't Get No) Satisfaction",
+      "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
+      "genre": ["Rock", "Pop", "Heavy"],
+      "year": 1965,
+      "duration": 290,
+      "rating": 6.66,
+      "artist": 4
+    },
+    {
+      "id": 5,
+      "title": "Where the Streets Have No Name",
+      "poster": "http://dummyimage.com/400x600.png/ff4444/ffffff",
+      "genre": ["Rock", "Pop", "Heavy"],
+      "year": 1982,
+      "duration": 217,
+      "rating": 8.36,
+      "artist": 5
+    },
+    {
+      "id": 6,
+      "title": "Who Says",
+      "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
+      "genre": ["Pop", "Romance"],
+      "year": 1995,
+      "duration": 340,
+      "rating": 7.99,
+      "artist": 1
+    },
+    {
+      "id": 7,
+      "title": "With or without you",
+      "poster": "http://dummyimage.com/400x600.png/cc0000/ffffff",
+      "genre": ["Rock", "Pop", "Alternative", "Blues"],
+      "year": 1972,
+      "duration": 305,
+      "rating": 6.77,
+      "artist": 5
+    },
+    {
+      "id": 8,
+      "title": "Start Me Up",
+      "poster": "http://dummyimage.com/400x600.png/ff4444/ffffff",
+      "genre": ["Rock", "Blues", "Heavy"],
+      "year": 1973,
+      "duration": 217,
+      "rating": 8.36,
+      "artist": 4
+    },
+    {
+      "id": 9,
+      "title": "1979",
+      "poster": "http://dummyimage.com/400x600.png/5fa2dd/ffffff",
+      "genre": ["Alternative", "Psychedelic rock", "Rock"],
+      "year": 1997,
+      "duration": 399,
+      "rating": 8.07,
+      "artist": 6
+    },
+    {
+      "id": 10,
+      "title": "Voodoo Child",
+      "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
+      "genre": ["Blues", "Psychedelic rock", "Rock"],
+      "year": 1960,
+      "duration": 503,
+      "rating": 9.99,
+      "artist": 7
+    },
+    {
+      "id": 11,
+      "title": "Hey Joe",
+      "poster": "http://dummyimage.com/400x600.png/dddddd/000000",
+      "genre": ["Blues", "Psychedelic rock", "Rock"],
+      "year": 1962,
+      "duration": 502,
+      "rating": 8.39,
+      "artist": 7
+    }
+  ],
+  "artists": [
+    {
+      "id": 1,
+      "name": "John Mayer",
+      "bornCity": "Conecticut",
+      "birthdate": "16/10/1977",
+      "img": "http://dummyimage.com/600x400.png/dddddd/000000",
+      "rating": 9.03,
+      "songs": [1, 6]
+    },
+    {
+      "id": 2,
+      "name": "The Beatles",
+      "bornCity": "Liverpool",
+      "birthdate": "19/04/1975",
+      "img": "http://dummyimage.com/600x400.png/5fa2dd/000000",
+      "rating": 2.43,
+      "songs": [2, 3]
+    },
+    {
+      "id": 3,
+      "name": "John Lennon",
+      "bornCity": "Liverpool",
+      "birthdate": "10/04/1986",
+      "img": null,
+      "rating": 7.92,
+      "songs": [2, 3, 8]
+    },
+    {
+      "id": 4,
+      "name": "The Rolling Stones",
+      "bornCity": "London",
+      "birthdate": "04/08/1990",
+      "img": "http://dummyimage.com/600x400.png/4fa25d/000000",
+      "rating": 4.37,
+      "songs": [4, 8]
+    },
+    {
+      "id": 5,
+      "name": "U2",
+      "bornCity": "London",
+      "birthdate": "30/12/1990",
+      "img": "https://dummyimage.com/600x400.png/2f125d/ffffff",
+      "rating": 3.92,
+      "songs": [5, 7]
+    },
+    {
+      "id": 6,
+      "name": "The Smashing Pumpkins",
+      "bornCity": "Pitomača",
+      "birthdate": "02/01/1968",
+      "img": "https://dummyimage.com/600x400.png/bf125d/ffffff",
+      "rating": 8.79,
+      "songs": [9]
+    },
+    {
+      "id": 7,
+      "name": "Jimi Hendrix",
+      "bornCity": "London",
+      "birthdate": "28/10/1953",
+      "img": "https://dummyimage.com/600x400.png/1f12ff/ffffff",
+      "rating": 10.0,
+      "songs": [11, 12]
+    }
+  ],
+  "companies": [
+    {
+      "id": 1,
+      "name": "Apple Corps Ltd",
+      "country": "Colombia",
+      "createYear": 1968,
+      "employees": 2000,
+      "rating": 8.32,
+      "songs": [2, 3]
+    },
+    {
+      "id": 2,
+      "name": "Vinilo Some Girls",
+      "country": "England",
+      "createYear": 2005,
+      "employees": 611,
+      "rating": 8.19,
+      "songs": [4, 8]
+    },
+    {
+      "id": 3,
+      "name": "Universal Music Group (UMG)",
+      "country": "Greece",
+      "createYear": 1994,
+      "employees": 511,
+      "rating": 8.09,
+      "songs": [5, 6, 7]
+    },
+    {
+      "id": 4,
+      "name": "Warner Music Group (WMG)",
+      "country": "Philippines",
+      "createYear": 2005,
+      "employees": 42,
+      "rating": 9.26,
+      "songs": [8, 9]
+    },
+    {
+      "id": 5,
+      "name": "Sony Music Entertainment (SME)",
+      "country": "China",
+      "createYear": 1999,
+      "employees": 921,
+      "rating": 1.77,
+      "songs": []
+    }
+  ]
+}
