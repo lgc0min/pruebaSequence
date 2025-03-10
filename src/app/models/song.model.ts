@@ -7,6 +7,17 @@ export interface BaseEntity {
     name: string;
   }
   
+  // Interfaces principales
+  export interface Song extends BaseEntity {
+    title: string;
+    artist: number; 
+    poster: string;
+    genre: GenreType[];
+    year: number;
+    duration: number;
+    rating: number;
+  }
+
   export enum GenreType {
     POP = 'Pop',
     ROCK = 'Rock',
@@ -20,17 +31,20 @@ export interface BaseEntity {
     BLUES = 'Blues',
     PSYCHEDELIC = 'Psychedelic rock'
   }
-  
-  // Interfaces principales
-  export interface Song extends BaseEntity {
-    title: string;
-    artist: number; 
-    poster: string;
-    genre: GenreType[];
-    year: number;
-    duration: number;
-    rating: number;
-  }
+
+  export const AVAILABLE_GENRES = [
+    GenreType.POP,
+    GenreType.ROCK,
+    GenreType.JAZZ,
+    GenreType.CLASSICAL,
+    GenreType.HIP_HOP,
+    GenreType.RNB,
+    GenreType.ELECTRONIC,
+    GenreType.FOLK,
+    GenreType.ALTERNATIVE,
+    GenreType.BLUES,
+    GenreType.PSYCHEDELIC
+  ]; 
   
   // Interfaces para vistas
   export interface SongView extends Omit<Song, 'name'> {
