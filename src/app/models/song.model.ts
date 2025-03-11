@@ -12,7 +12,7 @@ export interface BaseEntity {
     title: string;
     artist: number; 
     poster: string;
-    genre: GenreType[];
+    genre: string[];
     year: number;
     duration: number;
     rating: number;
@@ -54,4 +54,4 @@ export interface BaseEntity {
   
   // Tipos de utilidad
   export type CreateSongDTO = Omit<Song, 'id'>;
-  export type UpdateSongDTO = Partial<CreateSongDTO> & { genre?: GenreType[] };
+  export type UpdateSongDTO = Partial<CreateSongDTO> & { genre?: string[] };
