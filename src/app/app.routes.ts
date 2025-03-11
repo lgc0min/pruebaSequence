@@ -7,8 +7,9 @@ import { SongAddComponent } from './components/songs/song-add/song-add.component
 export const appRoutes: Routes = [
     { path: '', redirectTo: '/songs', pathMatch: 'full' },
     { path: 'songs', component: SongListComponent },
-    { path: 'songs/add', component: SongAddComponent },
-    { path: 'songs/:id', component: SongDetailComponent },
+    { path: 'song-add', component: SongAddComponent },
+    { path: 'song/:id', component: SongDetailComponent },
+    { path: '**', redirectTo: '/songs' }
 ];
 
 @NgModule({
