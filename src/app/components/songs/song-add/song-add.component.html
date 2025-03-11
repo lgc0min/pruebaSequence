@@ -1,1 +1,99 @@
-<p>song-add works!</p>
+<div class="form-container">
+    <div class="header">
+      <button class="back-button" routerLink="/songs">←</button>
+      <h2>{{ 'songs.add' | transloco }}</h2>
+    </div>
+  
+    <div class="song-form">
+      <form [formGroup]="songForm" (ngSubmit)="onSubmit()">
+
+        <div *ngIf="error" class="error-message">
+          {{ error }}
+        </div>
+  
+        <div class="form-content">
+          <!-- Título -->
+          <div class="form-field">
+            <label for="title">{{ 'songs.fields.title' | transloco }}:</label>
+            <input id="title" type="text" formControlName="title">
+          </div>
+  
+          <!-- Artista -->
+          <div class="form-field">
+            <label for="artistName">{{ 'songs.fields.artist' | transloco }}:</label>
+            <input id="artistName" type="text" formControlName="artistName">
+          </div>
+  
+          <!-- Géneros -->
+          <div class="form-field">
+            <label>{{ 'songs.fields.genres' | transloco }}:</label>
+            <div class="tag-input-container">
+              <input type="text" 
+                     formControlName="genreInput"
+                     [placeholder]="'genres.search' | transloco">
+              <div class="suggestions-container" *ngIf="filteredGenres.length > 0">
+                <div class="suggestion-item" 
+                     *ngFor="let genre of filteredGenres"
+                     (click)="addGenre(genre)">
+                  {{ genre }}
+                </div>
+              </div>
+            </div>
+            <div class="selected-tags">
+              <span class="tag" *ngFor="let genre of selectedGenres">
+                {{ genre }}
+                <span class="remove-tag" (click)="removeGenre(genre)">×</span>
+              </span>
+            </div>
+          </div>
+  
+          <!-- Compañías -->
+          <div class="form-field">
+            <label>{{ 'songs.fields.companies' | transloco }}:</label>
+            <div class="tag-input-container">
+              <input type="text" 
+                     formControlName="companyInput"
+                     [placeholder]="'companies.search' | transloco">
+              <div class="suggestions-container" *ngIf="filteredCompanies.length > 0">
+                <div class="suggestion-item" 
+                     *ngFor="let company of filteredCompanies"
+                     (click)="addCompany(company)">
+                  {{ company.name }}
+                </div>
+              </div>
+            </div>
+            <div class="selected-tags">
+              <span class="tag" *ngFor="let companyId of selectedCompanyIds">
+                {{ getCompanyName(companyId) }}
+                <span class="remove-tag" (click)="removeCompany(companyId)">×</span>
+              </span>
+            </div>
+          </div>
+  
+          <!-- Año -->
+          <div class="form-field">
+            <label for="year">{{ 'songs.fields.year' | transloco }}:</label>
+            <input id="year" type="number" formControlName="year">
+          </div>
+  
+          <!-- Duración -->
+          <div class="form-field">
+            <label for="duration">{{ 'songs.fields.duration' | transloco }} ({{ 'songs.duration.format' | transloco }}):</label>
+            <input id="duration" type="text" formControlName="duration">
+          </div>
+  
+          <!-- Rating -->
+          <div class="form-field">
+            <label for="rating">{{ 'songs.fields.rating' | transloco }} ({{ 'songs.rating.format' | transloco }}):</label>
+            <input id="rating" type="number" formControlName="rating" min="0" max="10" step="0.1">
+          </div>
+  
+          <!-- Botones -->
+          <div class="form-actions">
+            <button type="button" class="cancel-button" routerLink="/songs">{{ 'common.cancel' | transloco }}</button>
+            <button type="submit" class="submit-button" [disabled]="!songForm.valid">{{ 'common.save' | transloco }}</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
