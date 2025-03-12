@@ -1,0 +1,40 @@
+<div class="song-list">
+    <div class="header">
+      <h2>{{ 'songs.title' | transloco }}</h2>
+      <button class="lang-toggle" (click)="toggleLanguage()">
+        {{ currentLang === 'en' ? 'ES' : 'EN' }}
+      </button>
+    </div>
+    
+    <!-- Estado de error -->
+    <div *ngIf="error" class="error-container">
+      <i class="bi bi-exclamation-triangle"></i>
+      <p>{{ error }}</p>
+      <button (click)="fetchSongs()" class="retry-button">
+        <i class="bi bi-arrow-clockwise"></i>
+        {{ 'common.retry' | transloco }}
+      </button>
+    </div>
+
+    <div *ngIf="!isLoading && !error" class="songs-container">
+      <div class="song-card" *ngFor="let song of songs">
+        <div class="song-info" (click)="navigateToDetail(song.id)">
+          <h3>{{ song.title }}</h3>
+          <img [src]="song.poster" [alt]="song.title" />
+          <div class="genre-tags">
+            <span class="genre-tag" *ngFor="let genre of song.genre"># {{ genre }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Mensaje cuando no hay canciones -->
+    <div *ngIf="!isLoading && !error && songs.length === 0" class="empty-state">
+      <i class="bi bi-music-note"></i>
+      <p>{{ 'songs.empty' | transloco }}</p>
+    </div>
+  
+    <button class="add-song-btn" [routerLink]="['/song-add']">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+</div>

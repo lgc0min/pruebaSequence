@@ -1,0 +1,124 @@
+<div class="detail-container">
+    <button class="back-button" [routerLink]="['/songs']">←</button>
+  
+    <div class="error-message" *ngIf="error">
+      {{ error }}
+    </div>
+  
+    <!-- Contenido principal - Solo se muestra si hay una canción cargada -->
+    <div class="song-detail" *ngIf="song">
+      <div class="song-header">
+        <h2>{{ 'songs.details' | transloco }}</h2>
+      </div>
+  
+      <div class="song-info">
+        <div class="poster-container">
+          <img [src]="isEditing && editedSong ? editedSong.poster : song.poster" [alt]="song.title" class="song-poster">
+        </div>
+  
+        <!-- Detalles principales de la canción -->
+        <div class="info-details">
+          <div class="info-row">
+            <strong>{{ 'songs.fields.title' | transloco }}:</strong>
+            <span *ngIf="!isEditing">{{ song.title }}</span>
+            <input *ngIf="isEditing && editedSong" type="text" [(ngModel)]="editedSong.title" class="inline-input">
+          </div>
+  
+          <!-- Sección de géneros musicales -->
+          <div class="info-row">
+            <strong>{{ 'songs.fields.genres' | transloco }}:</strong>
+            <div class="tags" *ngIf="!isEditing">
+              <span class="tag" *ngFor="let genre of song.genre">{{ genre }}</span>
+            </div>
+            <div class="tag-input" *ngIf="isEditing && editedSong">
+              <input type="text" [ngModel]="newGenre" (input)="filterGenres($event)" [placeholder]="'genres.add' | transloco" class="inline-input">
+              <div class="suggestions" *ngIf="filteredGenres.length > 0">
+                <div class="suggestion-item" *ngFor="let genre of filteredGenres" (click)="addGenre(genre)">
+                  {{ genre }}
+                </div>
+              </div>
+              <div class="tags">
+                <span class="tag" *ngFor="let genre of editedSong.genre">
+                  {{ genre }}
+                  <span class="remove-tag" (click)="removeGenre(genre)">×</span>
+                </span>
+              </div>
+            </div>
+          </div>
+  
+          <div class="info-row">
+            <strong>{{ 'songs.fields.artist' | transloco }}:</strong>
+            <span *ngIf="!isEditing">{{ song.artistName }}</span>
+            <input *ngIf="isEditing" type="text" [(ngModel)]="artistName" class="inline-input">
+          </div>
+  
+          <div class="info-row">
+            <strong>{{ 'songs.fields.year' | transloco }}:</strong>
+            <span *ngIf="!isEditing">{{ song.year }}</span>
+            <input *ngIf="isEditing && editedSong" type="number" [(ngModel)]="editedSong.year" class="inline-input">
+          </div>
+  
+          <div class="info-row">
+            <strong>{{ 'songs.fields.duration' | transloco }}:</strong>
+            <span *ngIf="!isEditing">{{ song.duration }}</span>
+            <input *ngIf="isEditing && editedSong" type="number" [(ngModel)]="editedSong.duration" class="inline-input">
+          </div>
+  
+          <div class="info-row">
+            <strong>{{ 'songs.fields.rating' | transloco }}:</strong>
+            <span *ngIf="!isEditing">{{ song.rating }}/10</span>
+            <input *ngIf="isEditing && editedSong" type="number" [(ngModel)]="editedSong.rating" min="0" max="10" step="0.1" class="inline-input">
+          </div>
+  
+          <!-- Sección de países -->
+          <div class="info-row">
+            <strong>{{ 'songs.fields.countries' | transloco }}:</strong>
+            <div class="tags">
+              <span class="tag" *ngFor="let company of song.companies">{{ company.country }}</span>
+            </div>
+          </div>
+  
+          <div class="info-row">
+            <strong>{{ 'songs.fields.companies' | transloco }}:</strong>
+            <div class="tags" *ngIf="!isEditing">
+              <span class="tag" *ngFor="let company of song.companies">{{ company.name }}</span>
+            </div>
+            <div class="tag-input" *ngIf="isEditing && editedSong">
+              <input type="text" [ngModel]="newCompany" (input)="filterCompanies($event)" [placeholder]="'companies.add' | transloco" class="inline-input">
+              <div class="suggestions" *ngIf="filteredCompanies.length > 0">
+                <div class="suggestion-item" *ngFor="let company of filteredCompanies" (click)="addCompany(company)">
+                  {{ company }}
+                </div>
+              </div>
+              <div class="tags">
+                <span class="tag" *ngFor="let companyId of selectedCompanyIds">
+                  {{ getCompanyName(companyId) }}
+                  <span class="remove-tag" (click)="removeCompany(companyId)">×</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Botones de acción flotantes -->
+    <div class="floating-buttons" *ngIf="song">
+      <button *ngIf="!isEditing" class="action-button edit-button" (click)="toggleEdit()">
+        <i class="bi bi-pencil"></i>
+      </button>
+      <button *ngIf="!isEditing" class="action-button delete-button" (click)="deleteSong()">
+        <i class="bi bi-trash"></i>
+      </button>
+      <button *ngIf="isEditing" class="action-button save-button" (click)="saveChanges()">
+        <i class="bi bi-check-lg"></i>
+      </button>
+      <button *ngIf="isEditing" class="action-button cancel-button" (click)="cancelEdit()">
+        <i class="bi bi-x-lg"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div *ngIf="!song" class="loading">
+    <p>{{ 'common.loading' | transloco }}</p>
+  </div>
