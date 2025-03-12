@@ -5,12 +5,13 @@ import { SongService } from '../../../services/song.service';
 import { SongView } from '../../../models/song.model';
 import { TranslocoModule, TranslocoService } from '@ngneat/transloco';
 import { formatDuration } from '../../../shared/utils/time';
+import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
 
 
 @Component({
   selector: 'app-song-list',
   standalone: true,
-  imports: [RouterModule, CommonModule, TranslocoModule],
+  imports: [RouterModule, CommonModule, TranslocoModule,SpinnerComponent],
   templateUrl: './song-list.component.html',
   styleUrls: ['./song-list.component.css']
 })

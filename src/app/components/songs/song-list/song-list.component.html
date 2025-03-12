@@ -16,6 +16,9 @@
       </button>
     </div>
 
+    <!-- Estado de carga -->
+  <app-spinner *ngIf="isLoading" [message]="'common.loading' | transloco"></app-spinner>
+
     <div *ngIf="!isLoading && !error" class="songs-container">
       <div class="song-card" *ngFor="let song of songs">
         <div class="song-info" (click)="navigateToDetail(song.id)">
