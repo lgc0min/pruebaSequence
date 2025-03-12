@@ -1,1 +1,54 @@
-{}
+{
+  "common": {
+    "add": "Add",
+    "edit": "Edit",
+    "delete": "Delete",
+    "save": "Save",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Try Again"
+  },
+  "menu": {
+    "title": "Menu",
+    "songs": "Songs",
+    "artists": "Artists",
+    "genres": "Genres",
+    "companies": "Companies"
+  },
+  "songs": {
+    "title": "Songs",
+    "add": "Add Song",
+    "edit": "Edit Song",
+    "delete": "Delete Song",
+    "details": "Song Details",
+    "empty": "No songs found. Add your first song!",
+    "errors": {
+      "loadError": "Error loading songs. Please try again later.",
+      "saveError": "Error saving song",
+      "deleteError": "Error deleting song"
+    },
+    "fields": {
+      "title": "Title",
+      "artist": "Artist",
+      "album": "Album",
+      "year": "Year",
+      "genre": "Genre",
+      "genres": "Genres",
+      "duration": "Duration",
+      "rating": "Rating",
+      "country": "Country",
+      "countries": "Countries",
+      "company": "Company",
+      "companies": "Record Companies"
+    }
+  },
+  "genres": {
+    "add": "Add genre",
+    "search": "Search genre..."
+  },
+  "companies": {
+    "add": "Add record company",
+    "search": "Search company..."
+  }
+} 

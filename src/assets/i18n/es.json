@@ -1,1 +1,73 @@
-{}
+{
+    "common": {
+      "back": "Volver",
+      "save": "Guardar",
+      "cancel": "Cancelar",
+      "delete": "Eliminar",
+      "edit": "Editar",
+      "add": "Agregar",
+      "loading": "Cargando...",
+      "error": "Error",
+      "confirm": "¿Estás seguro?",
+      "retry": "Intentar de nuevo"
+    },
+    "menu": {
+      "title": "Menú",
+      "songs": "Canciones",
+      "artists": "Artistas",
+      "genres": "Géneros",
+      "companies": "Discográficas"
+    },
+    "songs": {
+      "title": "Canciones",
+      "add": "Agregar Canción",
+      "edit": "Editar Canción",
+      "delete": "Eliminar Canción",
+      "details": "Detalles de la Canción",
+      "empty": "No se encontraron canciones. ¡Agrega tu primera canción!",
+      "fields": {
+        "title": "Título",
+        "artist": "Artista",
+        "album": "Álbum",
+        "year": "Año",
+        "genre": "Género",
+        "genres": "Géneros",
+        "duration": "Duración",
+        "rating": "Calificación",
+        "country": "País",
+        "countries": "Países",
+        "company": "Discográfica",
+        "companies": "Discográficas"
+      },
+      "duration": {
+        "format": "mm:ss"
+      },
+      "rating": {
+        "format": "x/10"
+      },
+      "deleteConfirm": "¿Estás seguro de que deseas eliminar la canción \"{{title}}\"?",
+      "errors": {
+        "loadError": "Error al cargar las canciones. Por favor, inténtelo de nuevo más tarde.",
+        "saveError": "Error al guardar la canción",
+        "deleteError": "Error al eliminar la canción"
+      }
+    },
+    "genres": {
+      "add": "Añadir género",
+      "search": "Buscar género..."
+    },
+    "companies": {
+      "add": "Añadir discográfica",
+      "search": "Buscar discográfica...",
+      "errors": {
+        "loadError": "Error al cargar las compañías"
+      }
+    },
+    "artists": {
+      "errors": {
+        "loadError": "Error al cargar los artistas",
+        "createError": "Error al crear el artista"
+      }
+    }
+  }
+  
