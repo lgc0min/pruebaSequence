@@ -10,6 +10,7 @@ import { Artist } from './../../../models/artist.model';
 import { Company } from './../../../models/company.model';
 import { TranslocoModule } from '@ngneat/transloco';
 import { TranslocoService } from '@ngneat/transloco';
+import { formatDuration } from '../../../shared/utils/time';
 
 @Component({
   selector: 'app-song-detail',
@@ -164,6 +165,8 @@ export class SongDetailComponent implements OnInit {
       }
     }
   }
+
+  formatDuration = formatDuration;
 
   filterGenres(event: any): void {
     const value = event.target.value.toLowerCase();

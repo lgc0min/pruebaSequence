@@ -9,6 +9,7 @@ import { Song, CreateSongDTO, AVAILABLE_GENRES } from '../../../models/song.mode
 import { Artist } from './../../../models/artist.model';
 import { Company } from './../../../models/company.model';
 import { TranslocoModule } from '@ngneat/transloco';
+import { formatDuration } from '../../../shared/utils/time';
 
 // Componente para crear una nueva canción
 @Component({
@@ -194,7 +195,7 @@ export class SongAddComponent implements OnInit {
       poster: formValue.poster,
       genre: this.selectedGenres,
       year: formValue.year,
-      duration: formValue.duration,
+      duration: parseDuration(formValue.duration),
       rating: formValue.rating
     };
 
