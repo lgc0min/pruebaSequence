@@ -60,7 +60,7 @@
   
           <div class="info-row">
             <strong>{{ 'songs.fields.duration' | transloco }}:</strong>
-            <span *ngIf="!isEditing">{{ song.duration }}</span>
+            <span *ngIf="!isEditing">{{ formatDuration(song.duration) }}</span>
             <input *ngIf="isEditing && editedSong" type="number" [(ngModel)]="editedSong.duration" class="inline-input">
           </div>
   
