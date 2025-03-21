@@ -9,7 +9,7 @@ import { Song, CreateSongDTO, AVAILABLE_GENRES } from '../../../models/song.mode
 import { Artist } from './../../../models/artist.model';
 import { Company } from './../../../models/company.model';
 import { TranslocoModule } from '@ngneat/transloco';
-import { formatDuration } from '../../../shared/utils/time';
+import { parseDuration } from '../../../shared/utils/time';
 
 // Componente para crear una nueva canción
 @Component({
