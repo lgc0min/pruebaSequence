@@ -1,12 +1,14 @@
 {
   "common": {
-    "add": "Add",
-    "edit": "Edit",
-    "delete": "Delete",
+    "back": "Back",
     "save": "Save",
     "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
     "loading": "Loading...",
     "error": "Error",
+    "confirm": "Are you sure?",
     "retry": "Try Again"
   },
   "menu": {
@@ -14,7 +16,7 @@
     "songs": "Songs",
     "artists": "Artists",
     "genres": "Genres",
-    "companies": "Companies"
+    "companies": "Record Companies"
   },
   "songs": {
     "title": "Songs",
@@ -23,11 +25,6 @@
     "delete": "Delete Song",
     "details": "Song Details",
     "empty": "No songs found. Add your first song!",
-    "errors": {
-      "loadError": "Error loading songs. Please try again later.",
-      "saveError": "Error saving song",
-      "deleteError": "Error deleting song"
-    },
     "fields": {
       "title": "Title",
       "artist": "Artist",
@@ -39,8 +36,20 @@
       "rating": "Rating",
       "country": "Country",
       "countries": "Countries",
-      "company": "Company",
+      "company": "Record Company",
       "companies": "Record Companies"
+    },
+    "duration": {
+      "format": "mm:ss"
+    },
+    "rating": {
+      "format": "x/10"
+    },
+    "deleteConfirm": "Are you sure you want to delete the song \"{{title}}\"?",
+    "errors": {
+      "loadError": "Error loading songs. Please try again later.",
+      "saveError": "Error saving song",
+      "deleteError": "Error deleting song"
     }
   },
   "genres": {
@@ -49,6 +58,15 @@
   },
   "companies": {
     "add": "Add record company",
-    "search": "Search company..."
+    "search": "Search company...",
+    "errors": {
+      "loadError": "Error loading companies"
+    }
+  },
+  "artists": {
+    "errors": {
+      "loadError": "Error loading artists",
+      "createError": "Error creating artist"
+    }
   }
-} 
+}
