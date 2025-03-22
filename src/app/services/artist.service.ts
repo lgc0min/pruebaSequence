@@ -35,4 +35,14 @@ export class ArtistService {
   delete(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
+
+  getNextId(): Observable<number> {
+    return this.getAll().pipe(
+      map(artists => {
+        if (artists.length === 0) return 1;
+        const maxId = Math.max(...artists.map(artist => parseInt(artist.id)));
+        return maxId + 1;
+      })
+    );
+  }
 } 

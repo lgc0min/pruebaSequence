@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule, FormControl} from '@angular/forms';
 import { SongService } from '../../../services/song.service';
-import { ArtistService} from '../../../services/artist.service';
 import { CompanyService} from '../../../services/company.service';
 import { Song, CreateSongDTO, AVAILABLE_GENRES } from '../../../models/song.model'; 
-import { Artist } from './../../../models/artist.model';
 import { Company } from './../../../models/company.model';
 import { TranslocoModule } from '@ngneat/transloco';
 import { parseDuration } from '../../../shared/utils/time';
@@ -46,8 +44,6 @@ export class SongAddComponent implements OnInit {
     private fb: FormBuilder,
     // Servicio para operaciones con canciones
     private songService: SongService,
-    // Servicio para operaciones con artistas
-    private artistService: ArtistService,
     // Servicio para operaciones con compañías
     private companyService: CompanyService,
     // Servicio para navegación
@@ -148,65 +144,26 @@ export class SongAddComponent implements OnInit {
   onSubmit(): void {
     if (this.songForm.valid) {
       const formValue = this.songForm.value;
-      
-      // Buscar o crear el artista
-      this.artistService.getAll().subscribe({
-        next: (artists) => {
-          const existingArtist = artists.find(
-            a => a.name.toLowerCase() === formValue.artistName.toLowerCase()
-          );
+      const newSong: CreateSongDTO = {
+        title: formValue.title,
+        artist: null!, // Se actualizará después
+        poster: formValue.poster,
+        genre: this.selectedGenres,
+        year: formValue.year,
+        duration: parseDuration(formValue.duration),
+        rating: formValue.rating
+      };
 
-          if (existingArtist) {
-            this.createSong(Number(existingArtist.id));
-          } else {
-            const newArtist: Omit<Artist, 'id' | 'songs'> = {
-              name: formValue.artistName,
-              bornCity: '',
-              birthdate: '',
-              img: null,
-              rating: 0
-            };
-
-            this.artistService.create(newArtist).subscribe({
-              next: (artist) => {
-                this.createSong(Number(artist.id));
-              },
-              error: (error) => {
-                console.error('Error al crear el artista:', error);
-                this.error = 'Error al crear el artista';
-              }
-            });
-          }
+      // Dejamos que el servicio de canciones maneje la lógica del artista
+      this.songService.addSong(newSong, this.selectedCompanyIds, formValue.artistName).subscribe({
+        next: () => {
+          this.router.navigate(['/songs']);
         },
         error: (error) => {
-          console.error('Error al buscar el artista:', error);
-          this.error = 'Error al buscar el artista';
+          console.error('Error al crear la canción:', error);
+          this.error = 'Error al crear la canción';
         }
       });
     }
-  }
-
-  private createSong(artistId: number): void {
-    const formValue = this.songForm.value;
-    const newSong: CreateSongDTO = {
-      name: formValue.title,
-      title: formValue.title,
-      artist: artistId,
-      poster: formValue.poster,
-      genre: this.selectedGenres,
-      year: formValue.year,
-      duration: parseDuration(formValue.duration),
-      rating: formValue.rating
-    };
-
-    this.songService.addSong(newSong, this.selectedCompanyIds).subscribe({
-      next: () => {
-        this.router.navigate(['/songs']);
-      },
-      error: (error) => {
-        console.error('Error al crear la canción:', error);
-        this.error = 'Error al crear la canción';
-      }
-    });
   }
 }

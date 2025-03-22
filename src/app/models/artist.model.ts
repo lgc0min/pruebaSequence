@@ -1,8 +1,8 @@
-import { BaseEntity } from './song.model';
+import { NamedEntity } from './song.model';
 
-export interface Artist extends BaseEntity {
-  bornCity: string;
-  birthdate: string;
+export interface Artist extends NamedEntity {
+  bornCity: string | null;
+  birthdate: string | null;
   img: string | null;
   rating: number;
   songs: number[]; 

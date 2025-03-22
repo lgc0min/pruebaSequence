@@ -4,11 +4,16 @@ import { Artist } from "./artist.model";
 // Interfaz base para entidades con ID
 export interface BaseEntity {
     id: string;
+}
+
+// Interfaz base para entidades con nombre
+export interface NamedEntity extends BaseEntity {
     name: string;
-  }
+}
   
-  // Interfaces principales
-  export interface Song extends BaseEntity {
+// Interfaces principales
+export interface Song {
+    id: string;
     title: string;
     artist: number; 
     poster: string;
@@ -16,9 +21,9 @@ export interface BaseEntity {
     year: number;
     duration: number;
     rating: number;
-  }
+}
 
-  export enum GenreType {
+export enum GenreType {
     POP = 'Pop',
     ROCK = 'Rock',
     JAZZ = 'Jazz',
@@ -30,9 +35,9 @@ export interface BaseEntity {
     ALTERNATIVE = 'Alternative',
     BLUES = 'Blues',
     PSYCHEDELIC = 'Psychedelic rock'
-  }
+}
 
-  export const AVAILABLE_GENRES = [
+export const AVAILABLE_GENRES = [
     GenreType.POP,
     GenreType.ROCK,
     GenreType.JAZZ,
@@ -44,14 +49,14 @@ export interface BaseEntity {
     GenreType.ALTERNATIVE,
     GenreType.BLUES,
     GenreType.PSYCHEDELIC
-  ]; 
+]; 
   
-  // Interfaces para vistas
-  export interface SongView extends Omit<Song, 'name'> {
+// Interfaces para vistas
+export interface SongView extends Song {
     artistName: string;
     companies: Company[];
-  }
+}
   
-  // Tipos de utilidad
-  export type CreateSongDTO = Omit<Song, 'id'>;
-  export type UpdateSongDTO = Partial<CreateSongDTO> & { genre?: string[] };
+// Tipos de utilidad
+export type CreateSongDTO = Omit<Song, 'id'>;
+export type UpdateSongDTO = Partial<CreateSongDTO> & { genre?: string[] };

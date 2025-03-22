@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Song, SongView, CreateSongDTO, UpdateSongDTO } from '../models/song.model';
+import { Artist } from '../models/artist.model';
 import { environment } from '../../environments/environment';
 import { ArtistService } from './artist.service';
 import { CompanyService } from './company.service';
@@ -53,43 +54,103 @@ export class SongService {
   }
 
   // CREATE - Añade una nueva canción
-  addSong(song: CreateSongDTO, companyIds: string[] = []): Observable<Song> {
+  addSong(song: CreateSongDTO, companyIds: string[] = [], artistName: string): Observable<Song> {
     return this.getNextId().pipe(
       switchMap(newId => {
         const songToAdd = { ...song, id: newId };
+        delete (songToAdd as any).name; // Eliminar el campo name si existe
         
-        return this.http.post<Song>(this.apiUrl, songToAdd).pipe(
-          switchMap(createdSong => {
-            const updateTasks: Observable<any>[] = [];
+        // Primero verificamos si el artista existe
+        return this.artistService.getAll().pipe(
+          switchMap(artists => {
+            const existingArtist = artists.find(a => a.name.toLowerCase() === artistName.toLowerCase());
+            
+            if (existingArtist) {
+              // Si el artista existe, usamos su ID
+              songToAdd.artist = parseInt(existingArtist.id);
+              
+              return this.http.post<Song>(this.apiUrl, songToAdd).pipe(
+                switchMap(createdSong => {
+                  const updateTasks: Observable<any>[] = [];
 
-            // Actualizar el artista
-            updateTasks.push(
-              this.artistService.getById(createdSong.artist).pipe(
-                switchMap(artist => {
-                  const updatedSongs = [...artist.songs, parseInt(createdSong.id!)];
-                  return this.artistService.updateSongs(artist.id, updatedSongs);
+                  // Actualizar la lista de canciones del artista existente
+                  const updatedSongs = existingArtist.songs || [];
+                  updateTasks.push(
+                    this.artistService.updateSongs(existingArtist.id, [...updatedSongs, parseInt(createdSong.id!)])
+                  );
+
+                  // Actualizar compañías si es necesario
+                  if (companyIds.length > 0) {
+                    updateTasks.push(
+                      this.companyService.getAll().pipe(
+                        switchMap(companies => {
+                          const companyUpdates = companies
+                            .filter(company => companyIds.includes(company.id))
+                            .map(company => {
+                              const updatedSongs = [...company.songs, parseInt(createdSong.id!)];
+                              return this.companyService.updateSongs(company.id, updatedSongs);
+                            });
+                          return forkJoin(companyUpdates);
+                        })
+                      )
+                    );
+                  }
+
+                  return forkJoin(updateTasks).pipe(map(() => createdSong));
                 })
-              )
-            );
+              );
+            } else {
+              // Si el artista no existe, obtenemos el siguiente ID disponible
+              return this.artistService.getNextId().pipe(
+                switchMap(newArtistId => {
+                  const newArtist: Artist = {
+                    id: newArtistId.toString(),
+                    name: artistName,
+                    bornCity: null,
+                    birthdate: null,
+                    img: null,
+                    rating: 0,
+                    songs: []
+                  };
 
-            // Actualizar compañías
-            if (companyIds.length > 0) {
-              updateTasks.push(
-                this.companyService.getAll().pipe(
-                  switchMap(companies => {
-                    const companyUpdates = companies
-                      .filter(company => companyIds.includes(company.id))
-                      .map(company => {
-                        const updatedSongs = [...company.songs, parseInt(createdSong.id!)];
-                        return this.companyService.updateSongs(company.id, updatedSongs);
-                      });
-                    return forkJoin(companyUpdates);
-                  })
-                )
+                  return this.artistService.create(newArtist).pipe(
+                    switchMap(createdArtist => {
+                      songToAdd.artist = parseInt(createdArtist.id);
+                      
+                      return this.http.post<Song>(this.apiUrl, songToAdd).pipe(
+                        switchMap(createdSong => {
+                          const updateTasks: Observable<any>[] = [];
+
+                          // Actualizar la lista de canciones del nuevo artista
+                          updateTasks.push(
+                            this.artistService.updateSongs(createdArtist.id, [parseInt(createdSong.id!)])
+                          );
+
+                          // Actualizar compañías si es necesario
+                          if (companyIds.length > 0) {
+                            updateTasks.push(
+                              this.companyService.getAll().pipe(
+                                switchMap(companies => {
+                                  const companyUpdates = companies
+                                    .filter(company => companyIds.includes(company.id))
+                                    .map(company => {
+                                      const updatedSongs = [...company.songs, parseInt(createdSong.id!)];
+                                      return this.companyService.updateSongs(company.id, updatedSongs);
+                                    });
+                                  return forkJoin(companyUpdates);
+                                })
+                              )
+                            );
+                          }
+
+                          return forkJoin(updateTasks).pipe(map(() => createdSong));
+                        })
+                      );
+                    })
+                  );
+                })
               );
             }
-
-            return forkJoin(updateTasks).pipe(map(() => createdSong));
           })
         );
       })
@@ -206,4 +267,3 @@ export class SongService {
     );
   }
 }
-

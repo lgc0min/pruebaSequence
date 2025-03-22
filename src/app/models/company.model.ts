@@ -1,6 +1,6 @@
-import { BaseEntity } from './song.model';
+import { NamedEntity } from './song.model';
 
-export interface Company extends BaseEntity {
+export interface Company extends NamedEntity {
   country: string;
   createYear: number;
   employees: number;
